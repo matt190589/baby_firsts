@@ -7,6 +7,13 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      'xs': '360px',
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1200px',
+      'xl': '1440px',
+    },
     extend: {
       colors: {
         "bf-pink": "#ffb2b8",

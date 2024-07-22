@@ -74,55 +74,64 @@ export default function AccountForm({ user }: { user: User | null }) {
     }
 
     return (
-        <div className="form-widget">
-            <div>
-                <label htmlFor="email">Email</label>
-                <input id="email" type="text" value={user?.email} disabled />
-            </div>
-        <div>
+    <div className="flex flex-col items-center justify-between bg-bf-off-white p-12 md:p-24 ">
+        <div className="w-[240px] xs:w-[300px]">
+            <label htmlFor="email">Email</label>
+                <input
+                    className="w-full p-2 bg-bf-navy border rounded text-bf-off-white"
+                    id="email"
+                    type="text"
+                    value={user?.email}
+                    disabled
+                />
+        </div>
+        <div className="w-[240px] xs:w-[300px]">
             <label htmlFor="fullName">Full Name</label>
             <input
+                className="w-full p-2 bg-bf-navy border rounded text-bf-off-white"
                 id="fullName"
                 type="text"
                 value={fullname || ''}
                 onChange={(e) => setFullname(e.target.value)}
             />
         </div>
-        <div>
+        <div className="w-[240px] xs:w-[300px]">
             <label htmlFor="username">Username</label>
             <input
+                className="w-full p-2 bg-bf-navy border rounded text-bf-off-white"
                 id="username"
                 type="text"
                 value={username || ''}
                 onChange={(e) => setUsername(e.target.value)}
             />
         </div>
-        <div>
+        <div className="w-[240px] xs:w-[300px]">
             <label htmlFor="website">Website</label>
             <input
+                className="w-full p-2 bg-bf-navy border rounded text-bf-off-white"
                 id="website"
                 type="url"
                 value={website || ''}
                 onChange={(e) => setWebsite(e.target.value)}
             />
         </div>
-
-        <div>
-            <button
-                className="button primary block"
-                onClick={() => updateProfile({ fullname, username, website, avatar_url })}
-                disabled={loading}
-            >
-                {loading ? 'Loading ...' : 'Update'}
-            </button>
-        </div>
-
-        <div>
-            <form action="/auth/signout" method="post">
-                <button className="button block" type="submit">
-                    Sign out
-            </button>
-            </form>
+        <div className="flex items-center justify-center">
+            <div className="text-bf-navy px-3 py-2 rounded hover:bg-bf-navy hover:text-bf-off-white m-4">
+                <button
+                    className=""
+                    onClick={() => updateProfile({ fullname, username, website, avatar_url })}
+                    disabled={loading}
+                >
+                    {loading ? 'Loading ...' : 'Update'}
+                </button>
+            </div>
+            <div className="text-bf-navy px-3 py-2 rounded hover:bg-bf-navy hover:text-bf-off-white m-4">
+                <form action="/auth/signout" method="post">
+                    <button className="button block" type="submit">
+                        Sign out
+                </button>
+                </form>
+            </div>
         </div>
     </div>
     )
