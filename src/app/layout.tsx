@@ -4,7 +4,6 @@ import "./globals.css";
 
 import NavbarTop from "./components/NavbarTop";
 import NavbarBottom from "./components/NavbarBottom";
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Baby First",
@@ -18,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className="bg-bf-off-white Inter">
         <NavbarTop />
         {children}
         <NavbarBottom />
