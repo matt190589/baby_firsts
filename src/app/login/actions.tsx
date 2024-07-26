@@ -23,33 +23,4 @@ export async function login(formData: FormData) {
 
   revalidatePath('/', 'layout')
   redirect('/account')
-}
-
-export async function signup(formData: FormData) {
-  const supabase = createClient()
-
-    // Retrieve and validate email and password
-  const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-    
-if (!email || !password) {
-    console.error('Email and password are required.');
-    redirect('/error');
-    return;
-}
-    
-    console.log('Attempting to sign up with:', { email, password });
-
-  // Sign up user
-  const { error, data } = await supabase.auth.signUp({ email, password });
-
-  if (error) {
-    console.error('Sign-up error:', error.message);
-    redirect('/error');
-    return;
-  }
-
-  console.log('Sign-up successful:', data);
-  revalidatePath('/');
-  redirect('/account');
-}
+} 

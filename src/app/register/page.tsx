@@ -1,5 +1,4 @@
-import Link from 'next/link'
-import { login } from './actions'
+import { signup } from './actions'
 
 export default function LoginPage() {
 
@@ -10,15 +9,10 @@ export default function LoginPage() {
             <label htmlFor="password">Password:</label>
             <input id="password" name="password" type="password" required />
             <button
-                className="rounded-xl bg-sky-500 hover:bg-sky-700 text-white p-2 my-2"
-                formAction={login}
+                className="rounded-xl bg-gray-300 hover:bg-gray-500 text-white p-2 my-2"
+                formAction={signup}
             >
-                Log in
-            </button>
-            <button className="rounded-xl bg-gray-300 hover:bg-gray-500 text-white p-2 my-2">
-                <Link href="/register">
-                    Register
-                </Link>
+                Sign up
             </button>
         </form>
     )

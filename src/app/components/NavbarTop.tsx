@@ -20,13 +20,13 @@ const NavbarTop: React.FC<NavbarTopProps> = ({ title = "BabyFirsts" }) => {
                 </div>
                 <div className="flex items-center justify-center">
                     <Image
-                        src="/Images/baby-first-full-logo.webp"
+                        src="/Images/baby-head.webp"
                         alt="Baby First Logo"
-                        width={80}
+                        width={44}
                         height={30}
                         priority
                     />
-                    <div className="flex items-center text-xl text-bf-pink font-bold">
+                    <div className="flex items-center text-xl text-bf-pink font-bold ml-3">
                         <Link href="/">{title}</Link>
                     </div>
                 </div>
@@ -38,7 +38,7 @@ const NavbarTop: React.FC<NavbarTopProps> = ({ title = "BabyFirsts" }) => {
                         Logout
                     </div>
                     <div className="text-bf-off-white px-3 py-2 rounded hover:bg-bf-light-blue hover:text-bf-navy">
-                        <Link href="/account">Register</Link>
+                        <Link href="/register">Register</Link>
                     </div>
                 </div>
             </div>
