@@ -8,8 +8,8 @@ export default function AccountForm({ user }: { user: User | null }) {
     const [loading, setLoading] = useState(true)
     const [fullname, setFullname] = useState<string | null>(null)
     const [username, setUsername] = useState<string | null>(null)
-    const [website, setWebsite] = useState<string | null>(null)
-    const [avatar_url, setAvatarUrl] = useState<string | null>(null)
+    const [babyName, setBabyName] = useState<string | null>(null)
+    const [babyDob, setBabyDob] = useState<string | null>(null)
 
     const getProfile = useCallback(async () => {
         try {
@@ -17,7 +17,7 @@ export default function AccountForm({ user }: { user: User | null }) {
 
         const { data, error, status } = await supabase
             .from('profiles')
-            .select(`full_name, username, website, avatar_url`)
+            .select(`full_name, username, baby_name, baby_dob`)
             .eq('id', user?.id)
             .single()
 
@@ -29,8 +29,8 @@ export default function AccountForm({ user }: { user: User | null }) {
         if (data) {
             setFullname(data.full_name)
             setUsername(data.username)
-            setWebsite(data.website)
-            setAvatarUrl(data.avatar_url)
+            setBabyName(data.baby_name)
+            setBabyDob(data.baby_dob)
         }
         } catch (error) {
             alert('Error loading user data!')
@@ -45,13 +45,13 @@ export default function AccountForm({ user }: { user: User | null }) {
 
     async function updateProfile({
         username,
-        website,
-        avatar_url,
+        baby_name,
+        baby_dob,
     }: {
         username: string | null
         fullname: string | null
-        website: string | null
-        avatar_url: string | null
+        baby_name: string | null
+        baby_dob: string | null
     }) {
         try {
             setLoading(true)
@@ -60,8 +60,8 @@ export default function AccountForm({ user }: { user: User | null }) {
             id: user?.id as string,
             full_name: fullname,
             username,
-            website,
-            avatar_url,
+            baby_name,
+            baby_dob,
             updated_at: new Date().toISOString(),
         })
         if (error) throw error
@@ -106,20 +106,33 @@ export default function AccountForm({ user }: { user: User | null }) {
             />
         </div>
         <div className="w-[240px] xs:w-[300px]">
-            <label htmlFor="website">Website</label>
+            <label htmlFor="babyName">Baby name</label>
             <input
                 className="w-full p-2 bg-bf-navy border rounded text-bf-off-white"
-                id="website"
+                id="babyName"
                 type="url"
-                value={website || ''}
-                onChange={(e) => setWebsite(e.target.value)}
+                value={babyName || ''}
+                onChange={(e) => setBabyName(e.target.value)}
+            />
+        </div>
+        <div className="w-[240px] xs:w-[300px]">
+            <label htmlFor="babyDob">Baby date of birth</label>
+            <input
+                className="w-full p-2 bg-bf-navy border rounded text-bf-off-white"
+                id="babyDob"
+                type="date"
+                value={babyDob || ''}
+                onChange={(e) => setBabyDob(e.target.value)}
             />
         </div>
         <div className="flex items-center justify-center">
             <div className="text-bf-navy px-3 py-2 rounded hover:bg-bf-navy hover:text-bf-off-white m-4">
                 <button
                     className=""
-                    onClick={() => updateProfile({ fullname, username, website, avatar_url })}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        updateProfile({ fullname, username, baby_name: babyName, baby_dob: babyDob });
+                    }}
                     disabled={loading}
                 >
                     {loading ? 'Loading ...' : 'Update'}
