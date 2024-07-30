@@ -142,7 +142,7 @@ export default function AccountForm({ user }: { user: User | null }) {
                 <form action="/auth/signout" method="post">
                     <button className="button block" type="submit">
                         Sign out
-                </button>
+                    </button>
                 </form>
             </div>
         </div>

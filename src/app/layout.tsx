@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { SessionContextProvider } from "@supabase/auth-helpers-react";
 
 import NavbarTop from "./components/NavbarTop";
 import NavbarBottom from "./components/NavbarBottom";
