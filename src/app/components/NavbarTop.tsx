@@ -1,12 +1,33 @@
-import React from 'react';
+"use client"
+
+import React, { useEffect, useState } from 'react';
 import Image from "next/image";
 import Link from 'next/link';
+import { readUserSession } from '@/utils';
 
 interface NavbarTopProps {
     title?: string;
 }
 
+interface Session {
+    session: boolean;
+    // add other fields that `Session` might contain
+}
+
 const NavbarTop: React.FC<NavbarTopProps> = ({ title = "BabyFirsts" }) => {
+
+    const [userAuth, setUserAuth] = useState<Session | null>(null);
+
+    useEffect(() => {
+        const fetchSession = async () => {
+            const { data } = await readUserSession();
+            print(data.session)
+            setUserAuth(data.session);
+        };
+
+        fetchSession();
+    }, []);
+    
     return (
         <nav className="bg-bf-navy p-4 shadow-md border-b-2 border-bf-pink">
             <div className="container mx-auto flex justify-between items-center">
@@ -31,9 +52,11 @@ const NavbarTop: React.FC<NavbarTopProps> = ({ title = "BabyFirsts" }) => {
                     </div>
                 </div>
                 <div className="hidden md:flex items-center space-x-1">
-                    <div className="text-bf-off-white px-3 py-2 rounded hover:bg-bf-light-blue hover:text-bf-navy">
-                        <Link href="/login">Login</Link>
-                    </div>
+                    {!userAuth && (
+                        <div className="text-bf-off-white px-3 py-2 rounded hover:bg-bf-light-blue hover:text-bf-navy">
+                            <Link href="/login">Login</Link>
+                        </div>
+                    )}
                     <div className="text-bf-off-white px-3 py-2 rounded hover:bg-bf-light-blue hover:text-bf-navy">
                         Logout
                     </div>
