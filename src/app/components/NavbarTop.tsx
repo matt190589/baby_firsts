@@ -9,24 +9,8 @@ interface NavbarTopProps {
     title?: string;
 }
 
-interface Session {
-    session: boolean;
-    // add other fields that `Session` might contain
-}
-
-const NavbarTop: React.FC<NavbarTopProps> = ({ title = "BabyFirsts" }) => {
-
-    const [userAuth, setUserAuth] = useState<Session | null>(null);
-
-    useEffect(() => {
-        const fetchSession = async () => {
-            const { data } = await readUserSession();
-            print(data.session)
-            setUserAuth(data.session);
-        };
-
-        fetchSession();
-    }, []);
+const NavbarTop: React.FC<NavbarTopProps> = ({ title = "BabyFirsts"}) => {
+    const userAuth = true;
     
     return (
         <nav className="bg-bf-navy p-4 shadow-md border-b-2 border-bf-pink">
@@ -51,6 +35,7 @@ const NavbarTop: React.FC<NavbarTopProps> = ({ title = "BabyFirsts" }) => {
                         <Link href="/">{title}</Link>
                     </div>
                 </div>
+                {/* <p>Welcome, {userDetails ? userDetails.name : 'Guest'}!</p> */}
                 <div className="hidden md:flex items-center space-x-1">
                     {!userAuth && (
                         <div className="text-bf-off-white px-3 py-2 rounded hover:bg-bf-light-blue hover:text-bf-navy">
